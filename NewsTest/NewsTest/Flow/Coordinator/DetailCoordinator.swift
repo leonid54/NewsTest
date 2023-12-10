@@ -1,10 +1,11 @@
 import UIKit
 
 protocol ShowDetailInterface {
-    func showDetail(for feed: Feed)
+    func showDetail(for feed: Feed, hidesBottomBarWhenPushed: Bool)
 }
 
 struct DetailCoordinator: Coordinator {
+    var hidesBottomBarWhenPushed = true
     var navigationController: UINavigationController?
     
     func showDetail(feed: Feed) {
@@ -14,8 +15,8 @@ struct DetailCoordinator: Coordinator {
 }
 
 extension ShowDetailInterface where Self: UIViewController {
-    func showDetail(for feed: Feed) {
-        let coordinator = DetailCoordinator(navigationController: navigationController)
+    func showDetail(for feed: Feed, hidesBottomBarWhenPushed: Bool) {
+        let coordinator = DetailCoordinator( hidesBottomBarWhenPushed: hidesBottomBarWhenPushed, navigationController: navigationController)
         coordinator.showDetail(feed: feed)
     }
 }

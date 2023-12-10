@@ -1,6 +1,10 @@
 import UIKit
 
-final class DetailViewController: BaseViewController {
+fileprivate struct Constants {
+    static let defaultImage = "questionmark.folder.fill"
+}
+
+final class DetailViewController: BaseViewController, BackRouting{
     
     @IBOutlet private weak var customNavBar: UIView!
     @IBOutlet private weak var backButton: UIButton!
@@ -26,10 +30,16 @@ final class DetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction private func backButtonAction(_ sender: Any) {
+        goBack(animated: true)
     }
     
     @IBAction private func favoriteButtonAction(_ sender: Any) {
@@ -40,7 +50,18 @@ final class DetailViewController: BaseViewController {
 
 private extension DetailViewController {
     func configure() {
-        
+        bind()
+        setupUI()
+    }
+    
+    func setupUI() {
+        authorLabel.text = model.output.author
+        contentImageView.sd_setImage(with: model.output.feed.coverURL)
+        if contentImageView.image == nil {
+            contentImageView.image = UIImage(systemName: Constants.defaultImage)
+        }
+        descriptionLabel.text = model.output.feed.description
+        linkLabel.text = model.output.feed.link
     }
     
     func bind() {

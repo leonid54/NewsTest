@@ -17,6 +17,6 @@ struct FeedTableViewModel {
     }
     
     var author: String? {
-        return feed.creator.first
+        return feed.creator?.first
     }
 }

@@ -59,26 +59,13 @@ private extension CustomTabBarViewController {
     }
     
     func setTabBarAppearance() {
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.black
-        ]
-        navigationBarAppearance.backgroundColor = .white
-        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        
         let tabBarApperance = UITabBarAppearance()
         tabBarApperance.configureWithTransparentBackground()
         tabBarApperance.backgroundColor = UIColor.green
         UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
         UITabBar.appearance().standardAppearance = tabBarApperance
-        
-        UINavigationBar.appearance().tintColor = .label
-        
+                
         let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 8, weight: .medium)]
         UITabBarItem.appearance().setTitleTextAttributes(fontAttributes as [NSAttributedString.Key: Any], for: .normal)
     }
 }
-

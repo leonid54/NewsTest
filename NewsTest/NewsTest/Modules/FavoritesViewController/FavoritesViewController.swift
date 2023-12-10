@@ -17,7 +17,6 @@ final class FavoritesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         configure()
     }
 }
@@ -25,7 +24,9 @@ final class FavoritesViewController: BaseViewController {
 private extension FavoritesViewController {
     
     func configure() {
+        configureTableView()
         setupUI()
+        bind()
     }
     
     func setupUI() {
@@ -39,7 +40,7 @@ private extension FavoritesViewController {
     func configureTableView() {
         favoritesTableView.delegate = self
         favoritesTableView.dataSource = self
-        favoritesTableView.register(FeedTableViewCell.self,
+        favoritesTableView.register(FeedTableViewCell.uiNib,
                                forCellReuseIdentifier: FeedTableViewCell.cellIdentifierForReg)
     }
 }
@@ -50,7 +51,7 @@ extension FavoritesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedTableViewCell.reuseId,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedTableViewCell.cellIdentifierForReg,
                                                        for: indexPath) as? FeedTableViewCell else { return UITableViewCell() }
         cell.update(FeedTableViewModel(feed: model.output.feed[indexPath.row]))
         return cell
@@ -61,6 +62,6 @@ extension FavoritesViewController: UITableViewDelegate, ShowDetailInterface {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feed = model.output.feed[indexPath.row]
-        showDetail(for: feed)
+        showDetail(for: feed, hidesBottomBarWhenPushed: true)
     }
 }
