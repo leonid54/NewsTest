@@ -7,6 +7,7 @@ fileprivate struct Constants {
     static let newsFillImageTitle = "newspaper.fill"
     static let favImageTitle = "star"
     static let favFillImageTitle = "star.fill"
+    static let tabBarFontSize: CGFloat = 8
 }
 
 final class CustomTabBarViewController: UITabBarController {
@@ -65,7 +66,7 @@ private extension CustomTabBarViewController {
         UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
         UITabBar.appearance().standardAppearance = tabBarApperance
                 
-        let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 8, weight: .medium)]
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: Constants.tabBarFontSize, weight: .medium)]
         UITabBarItem.appearance().setTitleTextAttributes(fontAttributes as [NSAttributedString.Key: Any], for: .normal)
     }
 }

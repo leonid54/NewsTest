@@ -2,6 +2,8 @@ import UIKit
 
 fileprivate struct Constants {
     static let defaultImage = "questionmark.folder.fill"
+    static let heartImage = "heart"
+    static let heartFillImage = "heart.fill"
 }
 
 final class DetailViewController: BaseViewController, BackRouting{
@@ -35,7 +37,6 @@ final class DetailViewController: BaseViewController, BackRouting{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction private func backButtonAction(_ sender: Any) {
@@ -43,8 +44,7 @@ final class DetailViewController: BaseViewController, BackRouting{
     }
     
     @IBAction private func favoriteButtonAction(_ sender: Any) {
-        favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        model.onSetLike()
     }
 }
 
@@ -62,9 +62,17 @@ private extension DetailViewController {
         }
         descriptionLabel.text = model.output.feed.description
         linkLabel.text = model.output.feed.link
+        setFavoriteButtonImage(isLiked: model.isFavorite(item: model.output.feed))
     }
     
     func bind() {
-        
+        model.output.favoriteUpdated = { [weak self] isLiked in
+            guard let self = self else { return }
+            self.setFavoriteButtonImage(isLiked: isLiked)
+        }
+    }
+    
+    func setFavoriteButtonImage(isLiked: Bool) {
+        favoriteButton.setImage(UIImage(systemName: isLiked ? Constants.heartFillImage : Constants.heartImage), for: .normal)
     }
 }

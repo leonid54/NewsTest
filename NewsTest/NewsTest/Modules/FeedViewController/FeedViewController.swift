@@ -19,13 +19,7 @@ final class FeedViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         configure()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
 
@@ -33,6 +27,8 @@ private extension FeedViewController {
     
     func configure() {
         configureTableView()
+        bind()
+        setupUI()
     }
     
     func configureTableView() {
@@ -42,6 +38,10 @@ private extension FeedViewController {
                                forCellReuseIdentifier: FeedTableViewCell.cellIdentifierForReg)
         refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
         feedTableView.refreshControl = refreshControl
+    }
+    
+    func setupUI() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func bind() {

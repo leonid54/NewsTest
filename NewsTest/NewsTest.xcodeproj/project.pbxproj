@@ -33,6 +33,9 @@
 		17AD47AD2B256510007D99BC /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD47AC2B256510007D99BC /* RequestManager.swift */; };
 		17AD47AF2B256716007D99BC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD47AE2B256716007D99BC /* NetworkError.swift */; };
 		17AD47B22B256E1E007D99BC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD47B12B256E1E007D99BC /* UIViewControllerExtension.swift */; };
+		17AD47B52B25A8B7007D99BC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD47B42B25A8B7007D99BC /* StorageManager.swift */; };
+		17AD47B72B25A9BA007D99BC /* FeedRealmEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD47B62B25A9BA007D99BC /* FeedRealmEntity.swift */; };
+		17AD47B92B25AC1F007D99BC /* FeedRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD47B82B25AC1F007D99BC /* FeedRealmRepository.swift */; };
 		F0C64A8F19A2509ABCEF3F90 /* Pods_NewsTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D990AF31734EF2588622F14D /* Pods_NewsTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +68,9 @@
 		17AD47AC2B256510007D99BC /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		17AD47AE2B256716007D99BC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		17AD47B12B256E1E007D99BC /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		17AD47B42B25A8B7007D99BC /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		17AD47B62B25A9BA007D99BC /* FeedRealmEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRealmEntity.swift; sourceTree = "<group>"; };
+		17AD47B82B25AC1F007D99BC /* FeedRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRealmRepository.swift; sourceTree = "<group>"; };
 		8D845669990E819154127737 /* Pods-NewsTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsTest.release.xcconfig"; path = "Target Support Files/Pods-NewsTest/Pods-NewsTest.release.xcconfig"; sourceTree = "<group>"; };
 		9FCD07FB23DC46D978C347D7 /* Pods-NewsTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsTest.debug.xcconfig"; path = "Target Support Files/Pods-NewsTest/Pods-NewsTest.debug.xcconfig"; sourceTree = "<group>"; };
 		D990AF31734EF2588622F14D /* Pods_NewsTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +115,7 @@
 				17AD47852B24501E007D99BC /* Flow */,
 				17AD47792B244CFE007D99BC /* TabBar */,
 				17AD47862B24502D007D99BC /* Modules */,
+				17AD47B32B25A850007D99BC /* DataManager */,
 				17AD47A12B24612A007D99BC /* Network */,
 				17AD476E2B244BEE007D99BC /* Assets.xcassets */,
 				17AD47702B244BEE007D99BC /* LaunchScreen.storyboard */,
@@ -228,6 +235,16 @@
 				17AD47B12B256E1E007D99BC /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		17AD47B32B25A850007D99BC /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				17AD47B42B25A8B7007D99BC /* StorageManager.swift */,
+				17AD47B62B25A9BA007D99BC /* FeedRealmEntity.swift */,
+				17AD47B82B25AC1F007D99BC /* FeedRealmRepository.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		65E981FD0273E972106E8B0E /* Pods */ = {
@@ -367,7 +384,9 @@
 			files = (
 				17AD47912B24526E007D99BC /* BaseTableViewCell.swift in Sources */,
 				17AD47992B2460B1007D99BC /* FavoritesViewModel.swift in Sources */,
+				17AD47B72B25A9BA007D99BC /* FeedRealmEntity.swift in Sources */,
 				17AD47A62B248EC2007D99BC /* Coordinator.swift in Sources */,
+				17AD47B52B25A8B7007D99BC /* StorageManager.swift in Sources */,
 				17AD47932B245503007D99BC /* Feed.swift in Sources */,
 				17AD479C2B2460FC007D99BC /* DetailViewController.swift in Sources */,
 				17AD47812B244FC2007D99BC /* FeedViewModel.swift in Sources */,
@@ -378,6 +397,7 @@
 				17AD47682B244BE8007D99BC /* SceneDelegate.swift in Sources */,
 				17AD477F2B244FB7007D99BC /* FeedViewController.swift in Sources */,
 				17AD47B22B256E1E007D99BC /* UIViewControllerExtension.swift in Sources */,
+				17AD47B92B25AC1F007D99BC /* FeedRealmRepository.swift in Sources */,
 				17AD47AB2B24D34F007D99BC /* BackRouting.swift in Sources */,
 				17AD47A02B24611F007D99BC /* DetailViewModel.swift in Sources */,
 				17AD477B2B244D17007D99BC /* CustomTabBarViewController.swift in Sources */,

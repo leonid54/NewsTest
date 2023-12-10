@@ -14,6 +14,4 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }
-    
 }
-

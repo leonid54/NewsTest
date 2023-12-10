@@ -1,14 +1,21 @@
 import UIKit
 
+fileprivate struct Constants {
+    static let toastAlpha: CGFloat = 1
+    static let toastCornerRad: CGFloat = 15
+    static let intervalShowing = 1.5
+    static let alertTitle = "Ok"
+}
+
 extension UIViewController {
-    func showToast(message: String, interval: Double = 1.5, completion: (() -> Void)? = nil) {
+    func showToast(message: String, interval: Double = Constants.intervalShowing, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         
         alert.view.backgroundColor = .blue
-        alert.view.alpha = 1
-        alert.view.layer.cornerRadius = 15
+        alert.view.alpha = Constants.toastAlpha
+        alert.view.layer.cornerRadius = Constants.toastCornerRad
         
-        let cancelAction = UIAlertAction(title: "Ок", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: Constants.alertTitle, style: .cancel) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
         
