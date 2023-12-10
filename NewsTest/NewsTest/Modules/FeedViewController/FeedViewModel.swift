@@ -13,13 +13,18 @@ final class FeedViewModel {
         var onNetworkError: ErrorClosure?
     }
     
-    private var feedAPIService: RequestManager
+    private let feedAPIService: RequestManager
 
     var output: Output
     
     init(feed: [Feed], feedAPIService: RequestManager = RequestManager()) {
         output = Output(feed: feed)
         self.feedAPIService = feedAPIService
+    }
+    
+    convenience init() {
+        let placeholderFeed = EntityPlaceholder.getFeedPlaceholder()
+        self.init(feed: placeholderFeed)
     }
 }
 

@@ -5,6 +5,7 @@ final class FavoritesViewModel {
     
     struct Output {
         var feed: [Feed]
+        var onUpdateHandler: SimpleClosure?
     }
     
     var output: Output
@@ -17,6 +18,10 @@ final class FavoritesViewModel {
     }
     
     func update() {
-        output.feed = repository.fetchFavoriteFeed() ?? []
+        let dataBase = repository.fetchFavoriteFeed() ?? []
+        if !Feed.checkEqual(feed: output.feed, dataBase: dataBase) {
+            output.feed = dataBase
+            output.onUpdateHandler?()
+        }
     }
 }

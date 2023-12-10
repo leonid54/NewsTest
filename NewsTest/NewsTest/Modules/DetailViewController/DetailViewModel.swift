@@ -20,7 +20,7 @@ final class DetailViewModel {
     }
     
     var output: Output
-    var storage: StorageManager
+    private let storage: StorageManager
     
     init(feed: Feed, storage: StorageManager = .shared) {
         output = Output(feed: feed)

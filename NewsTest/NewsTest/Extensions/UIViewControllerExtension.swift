@@ -20,7 +20,7 @@ extension UIViewController {
         }
         
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + interval) {
             alert.dismiss(animated: true, completion: nil)

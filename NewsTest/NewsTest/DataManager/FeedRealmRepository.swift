@@ -14,6 +14,6 @@ final class FeedRealmRepository: FeedRepository {
     }
     
     func fetchFavoriteFeed() -> [Feed]? {
-        return realm?.objects(FeedRealmEntity.self).map { $0.asFeed()}
+        return realm?.objects(FeedRealmEntity.self).map { $0.asFeed() }
     }
 }

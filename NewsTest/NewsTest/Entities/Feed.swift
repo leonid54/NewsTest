@@ -27,3 +27,9 @@ struct Feed: Decodable {
         return URL(string: url)
     }
 }
+
+extension Feed: Equatable {
+    static func checkEqual(feed: [Feed], dataBase: [Feed]) -> Bool {
+        return feed == dataBase
+    }
+}

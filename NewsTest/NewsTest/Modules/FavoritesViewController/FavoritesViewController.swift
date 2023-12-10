@@ -19,22 +19,26 @@ final class FavoritesViewController: BaseViewController {
         super.viewDidLoad()
         configure()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        model.update()
+    }
 }
 
 private extension FavoritesViewController {
     
     func configure() {
         configureTableView()
-        setupUI()
         bind()
     }
     
-    func setupUI() {
-        
-    }
-    
     func bind() {
-        
+        model.output.onUpdateHandler = { [weak self] in
+            guard let self = self else { return }
+            self.favoritesTableView.reloadData()
+        }
     }
     
     func configureTableView() {

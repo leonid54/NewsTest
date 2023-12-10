@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-class FeedRealmEntity: Object {
+final class FeedRealmEntity: Object {
     @objc dynamic var articleID: String = ""
     @objc dynamic var creator: String?
     @objc dynamic var imageURL: String?

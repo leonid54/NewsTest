@@ -27,8 +27,8 @@ private extension CustomTabBarViewController {
     }
 
     func setVC() {
-        let feedViewModel = FeedViewModel(feed: [Feed.init(articleID: "", creator: [""], imageURL: "", description: "", link: "", pubDate: "")])
-        let favoritesViewModel = FavoritesViewModel(feed: [Feed.init(articleID: "", creator: [""], imageURL: "", description: "", link: "", pubDate: "")])
+        let feedViewModel = FeedViewModel()
+        let favoritesViewModel = FavoritesViewModel()
         
         let viewControllers = [
             FeedViewController(model: feedViewModel),
