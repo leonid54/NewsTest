@@ -3,10 +3,6 @@ import Foundation
 typealias SimpleClosure = () -> Void
 typealias ErrorClosure = (Error) -> Void
 
-fileprivate struct Constants {
-    static let firstPage = 1
-}
-
 final class FeedViewModel {
     
     struct Output {

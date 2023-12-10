@@ -60,7 +60,7 @@ private extension DetailViewController {
         if contentImageView.image == nil {
             contentImageView.image = UIImage(systemName: Constants.defaultImage)
         }
-        descriptionLabel.text = model.output.feed.description
+        descriptionLabel.text = model.output.feed.descriptionText
         linkLabel.text = model.output.feed.link
         setFavoriteButtonImage(isLiked: model.isFavorite(item: model.output.feed))
     }

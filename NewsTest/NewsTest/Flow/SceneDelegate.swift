@@ -8,9 +8,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.tintColor = .label
         let initVC = CustomTabBarViewController()
         let navVC = UINavigationController(rootViewController: initVC)
+        navVC.navigationBar.isHidden = true
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }

@@ -9,7 +9,7 @@ struct FeedTableViewModel {
     }
     
     var description: String? {
-        return feed.description
+        return feed.descriptionText
     }
     
     var date: String? {

@@ -21,20 +21,12 @@ final class StorageManager {
         }
     }
     
-    func deleteFavoriteObject(_ item: FeedRealmEntity) {
-        try? realm?.write {
-            if let itemToDelete = realm?.objects(FeedRealmEntity.self).filter("articleID == %@", item.articleID).first {
-                realm?.delete(itemToDelete)
-            }
-        }
-    }
-    
     func saveToRealm(item: Feed) {
         let realmEntity = FeedRealmEntity()
         realmEntity.articleID = item.articleID
         realmEntity.creator = item.creator?.first
         realmEntity.imageURL = item.imageURL
-        realmEntity.descriptionText = item.description
+        realmEntity.descriptionText = item.descriptionText
         realmEntity.link = item.link
         realmEntity.pubDate = item.pubDate
         let realm = try? Realm()

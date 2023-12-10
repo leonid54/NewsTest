@@ -60,6 +60,17 @@ private extension CustomTabBarViewController {
     }
     
     func setTabBarAppearance() {
+        
+        if #available(iOS 15, *) {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.backgroundColor = .clear
+            navigationBarAppearance.backgroundImage = nil
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
+        
         let tabBarApperance = UITabBarAppearance()
         tabBarApperance.configureWithTransparentBackground()
         tabBarApperance.backgroundColor = UIColor.green

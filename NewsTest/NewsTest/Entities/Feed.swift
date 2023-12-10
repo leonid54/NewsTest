@@ -9,7 +9,7 @@ struct Feed: Decodable {
     let articleID: String
     let creator: [String]?
     let imageURL: String?
-    let description: String?
+    let descriptionText: String?
     let link: String
     let pubDate: String
 
@@ -17,7 +17,7 @@ struct Feed: Decodable {
          case articleID = "article_id"
          case creator
          case imageURL = "image_url"
-         case description
+         case descriptionText = "description"
          case link
          case pubDate
      }

@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 protocol FeedRepository {
-    func fetchFavoriteFeed() -> Results<FeedRealmEntity>?
+    func fetchFavoriteFeed() -> [Feed]?
 }
 
 final class FeedRealmRepository: FeedRepository {
@@ -13,7 +13,7 @@ final class FeedRealmRepository: FeedRepository {
         self.realm = realm
     }
     
-    func fetchFavoriteFeed() -> Results<FeedRealmEntity>? {
-        return realm?.objects(FeedRealmEntity.self)
+    func fetchFavoriteFeed() -> [Feed]? {
+        return realm?.objects(FeedRealmEntity.self).map { $0.asFeed()}
     }
 }
