@@ -1,10 +1,17 @@
 import UIKit
 
+fileprivate struct Constants {
+    static let indicatorColor: UIColor = .white
+    static let spinnerHeight: CGFloat = 44
+    static let spinnerRect: CGFloat = 0
+}
+
 final class FeedViewController: BaseViewController {
     
     @IBOutlet private weak var feedTableView: UITableView!
     
     private let refreshControl = UIRefreshControl()
+    private let spinner = UIActivityIndicatorView(style: .large)
 
     private var model: FeedViewModel
     private var isLoading = false
@@ -34,6 +41,7 @@ private extension FeedViewController {
     func configure() {
         configureTableView()
         bind()
+        setupUI()
     }
     
     func configureTableView() {
@@ -43,7 +51,22 @@ private extension FeedViewController {
                                forCellReuseIdentifier: FeedTableViewCell.cellIdentifierForReg)
         refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
         feedTableView.refreshControl = refreshControl
-        refreshControl.tintColor = .white
+    }
+    
+    func setupUI() {
+        refreshControl.tintColor = Constants.indicatorColor
+        spinner.frame = CGRect(x: Constants.spinnerRect, y: Constants.spinnerRect, width: feedTableView.bounds.width, height: Constants.spinnerHeight)
+        feedTableView.tableFooterView = spinner
+    }
+    
+    func showLoading() {
+        spinner.startAnimating()
+        feedTableView.tableFooterView?.isHidden = false
+    }
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        feedTableView.tableFooterView?.isHidden = true
     }
     
     func bind() {
@@ -57,12 +80,12 @@ private extension FeedViewController {
             self.refreshControl.beginRefreshing()
         }
         
-        model.output.feedLoaded = { [weak self] feed, isLoading in
+        model.output.feedLoaded = { [weak self] isLoading in
             guard let self else { return }
-            self.model.output.feed = feed
             self.feedTableView.reloadData()
             self.refreshControl.endRefreshing()
             self.isLoading = isLoading
+            self.hideLoading()
         }
     }
     
@@ -96,7 +119,7 @@ extension FeedViewController: UITableViewDelegate, ShowDetailInterface {
         checkForNextPage()
     }
     
-    func checkForNextPage() {
+    private func checkForNextPage() {
         let scrollViewContentHeight = feedTableView.contentSize.height
         let scrollOffsetThreshold = scrollViewContentHeight - feedTableView.bounds.height
         if feedTableView.contentOffset.y > scrollOffsetThreshold {
@@ -104,8 +127,9 @@ extension FeedViewController: UITableViewDelegate, ShowDetailInterface {
         }
     }
     
-    func triggerBottomRefresh() {
+    private func triggerBottomRefresh() {
         if !isLoading {
+            showLoading()
             isLoading = true
             model.getFeed(page: model.output.nextPage)
         }

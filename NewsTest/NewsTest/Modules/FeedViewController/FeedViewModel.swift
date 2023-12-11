@@ -9,7 +9,7 @@ final class FeedViewModel {
         var feed: [Feed]
         var nextPage: String?
         var feedLoading: SimpleClosure?
-        var feedLoaded: ((_ feed: [Feed], _ isLoading: Bool) -> Void)?
+        var feedLoaded: ((_ isLoading: Bool) -> Void)?
         var onNetworkError: ErrorClosure?
     }
     
@@ -38,7 +38,7 @@ extension FeedViewModel {
                 case .success(let response):
                     self.output.nextPage = response.nextPage
                     self.output.feed.append(contentsOf: response.results)
-                    self.output.feedLoaded?(self.output.feed, false)
+                    self.output.feedLoaded?(false)
                 case .failure(let error):
                     self.output.onNetworkError?(error)
                 }
