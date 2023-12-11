@@ -5,7 +5,7 @@ struct FeedData: Decodable {
     let nextPage: String
 }
 
-struct Feed: Decodable {
+struct Feed: Decodable, Equatable {
     let articleID: String
     let creator: [String]?
     let imageURL: String?
@@ -25,11 +25,5 @@ struct Feed: Decodable {
     var coverURL: URL? {
         guard let url = imageURL else { return nil }
         return URL(string: url)
-    }
-}
-
-extension Feed: Equatable {
-    static func checkEqual(feed: [Feed], dataBase: [Feed]) -> Bool {
-        return feed == dataBase
     }
 }

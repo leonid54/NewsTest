@@ -24,7 +24,7 @@ final class RequestManager {
     
     func downloadData(page: String?, completion: @escaping (Result<FeedData, Error>) -> Void) {
         guard let url = URL(string: APIEndpoints.feed(page: page)) else {
-            dispatchToMain(.failure(NetworkError.invalidURL), completion: completion)
+            dispatchToGlobal(.failure(NetworkError.invalidURL), completion: completion)
             return
         }
         
@@ -39,32 +39,32 @@ final class RequestManager {
                                 error: Error?,
                                 completion: @escaping (Result<FeedData, Error>) -> Void) {
         if let error = error {
-            dispatchToMain(.failure(error), completion: completion)
+            dispatchToGlobal(.failure(error), completion: completion)
             return
         }
         
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            dispatchToMain(.failure(NetworkError.invalidHTTPResponse), completion: completion)
+            dispatchToGlobal(.failure(NetworkError.invalidHTTPResponse), completion: completion)
             return
         }
         
         guard let data = data else {
-            dispatchToMain(.failure(NetworkError.invalidData), completion: completion)
+            dispatchToGlobal(.failure(NetworkError.invalidData), completion: completion)
             return
         }
         
         do {
             let decoder = JSONDecoder()
             let feed = try decoder.decode(FeedData.self, from: data)
-            dispatchToMain(.success(feed), completion: completion)
+            dispatchToGlobal(.success(feed), completion: completion)
         } catch {
-            dispatchToMain(.failure(error), completion: completion)
+            dispatchToGlobal(.failure(error), completion: completion)
         }
     }
     
-    private func dispatchToMain<T>(_ result: Result<T, Error>,
+    private func dispatchToGlobal<T>(_ result: Result<T, Error>,
                                    completion: @escaping (Result<T, Error>) -> Void) {
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             completion(result)
         }
     }

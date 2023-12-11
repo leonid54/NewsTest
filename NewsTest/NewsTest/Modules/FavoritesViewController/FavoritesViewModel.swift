@@ -18,10 +18,16 @@ final class FavoritesViewModel {
     }
     
     func update() {
-        let dataBase = repository.fetchFavoriteFeed() ?? []
-        if !Feed.checkEqual(feed: output.feed, dataBase: dataBase) {
-            output.feed = dataBase
+        let feedFromDB = repository.fetchFavoriteFeed() ?? []
+        if !isFeedEqual(feed: output.feed, feedFromDB: feedFromDB) {
+            output.feed = feedFromDB
             output.onUpdateHandler?()
         }
+    }
+}
+
+private extension FavoritesViewModel {
+    func isFeedEqual(feed: [Feed], feedFromDB: [Feed]) -> Bool {
+        return feed == feedFromDB
     }
 }

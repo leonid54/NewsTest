@@ -9,7 +9,7 @@ final class FeedViewModel {
         var feed: [Feed]
         var nextPage: String?
         var feedLoading: SimpleClosure?
-        var feedLoaded: ((_ feed: [Feed]) -> Void)?
+        var feedLoaded: ((_ feed: [Feed], _ isLoading: Bool) -> Void)?
         var onNetworkError: ErrorClosure?
     }
     
@@ -23,8 +23,7 @@ final class FeedViewModel {
     }
     
     convenience init() {
-        let placeholderFeed = EntityPlaceholder.getFeedPlaceholder()
-        self.init(feed: placeholderFeed)
+        self.init(feed: [])
     }
 }
 
@@ -32,13 +31,17 @@ extension FeedViewModel {
     
     func getFeed(page: String? = nil) {
         feedAPIService.downloadData(page: page) { [weak self] result in
-            self?.output.feedLoading?()
-            switch result {
-            case .success(let response):
-                self?.output.nextPage = response.nextPage
-                self?.output.feedLoaded?(response.results)
-            case .failure(let error):
-                self?.output.onNetworkError?(error)
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.output.feedLoading?()
+                switch result {
+                case .success(let response):
+                    self.output.nextPage = response.nextPage
+                    self.output.feed.append(contentsOf: response.results)
+                    self.output.feedLoaded?(self.output.feed, false)
+                case .failure(let error):
+                    self.output.onNetworkError?(error)
+                }
             }
         }
     }
